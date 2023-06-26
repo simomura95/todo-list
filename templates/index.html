@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+<!--don't want navbar in the homepage, to have a full-height background image (and to exercise)-->
+<!--a color gradient would have allowed the inclusion of the navbar(?)-->
+{% block navbar %}
+{% endblock navbar %}
+
+<!--a simple welcome text (surely improvable)-->
+{% block content %}
+<div class="container-fluid d-flex min-vh-100 my-auto text-center text-color1" style="background-image: linear-gradient(var(--color3), var(--color4))">
+    <div class="col-lg-6 mx-auto my-auto">
+        <h1 class="display-5 fw-bold">LISTODO</h1>
+        <p class="lead mb-4">Keep track of what you have to do</p>
+        <p class="lead mb-4">Access your lists everywhere, everytime you want</p>
+        <p class="lead mb-4">
+            <a href="{{ url_for('login') }}" class="text-color1">Login</a> or <a href="{{ url_for('register') }}" class="text-color1">register</a> to start
+        </p>
+    </div>
+</div>
+{% endblock %}

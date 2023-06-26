@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+<!--as login.html, form done with wtf, but not with quick-form, so importing "bootstrap/wtf.html" is not needed-->
+{% block content %}
+<div class="d-flex justify-content-center py-lg-5 py-md-4 py-2 text-color1">
+    <form action="{{ url_for('register') }}" method="post" novalidate>
+        {{ form.csrf_token }}
+        <h1 class="h3 mb-3 fw-normal">Register</h1>
+
+<!--        to iter on fields of form. Useful to write more compact code if all form fields have the same structure-->
+        {% for field in (form|list)[:3]: %}
+        <div class="form-floating mb-3">
+            {{ field(class="form-control", size=32, placeholder="ph") }}
+            {{ field.label }}
+            {% for error in field.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+        {% endfor %}
+
+        {{ form.submit(class="button1 w-100 py-2 rounded") }}
+    </form>
+</div>
+{% endblock content %}

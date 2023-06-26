@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+<!--form done with wtf, but not with quick-form, so importing "bootstrap/wtf.html" is not needed-->
+<!--it requires so much more time, but is extremely customizable, e.g. show errors in red, use form-floating to have a more beautiful form...-->
+{% block content %}
+
+<div class="d-flex justify-content-center py-lg-5 py-md-4 py-2 text-color1">
+    <form action="{{ url_for('login') }}" method="post" novalidate>
+        {{ form.csrf_token }}
+<!--        need above line to avoid errors-->
+        <h1 class="h3 mb-3 fw-normal">Login</h1>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+              <br><h4 class="flashes text-danger">{{ message }}</h4>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        <div class="form-floating mb-3">
+            {{ form.email(class="form-control", size=32, placeholder="name@mail.com") }}
+            {{ form.email.label }}
+            {% for error in form.email.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="form-floating mb-3">
+            {{ form.password(class="form-control", size=32, placeholder="***") }}
+            {{ form.password.label }}
+            {% for error in form.password.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        {{ form.submit(class="button1 w-100 py-2 rounded") }}
+    </form>
+</div>
+{% endblock content %}

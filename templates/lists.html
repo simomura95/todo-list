@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5 text-color1">
+    <h2>My lists</h2>
+
+    <form action="{{ url_for('lists') }}" method="post" novalidate class="d-flex mb-3 align-items-center">
+        {{ form.csrf_token }}
+        <div class="col-xl-10 col-md-9 col-8 me-auto">
+            {{ form.text(class="form-control", size=32, placeholder="New list title:") }}
+        </div>
+        <div class="col-xl-1 col-md-2 col-3">
+            {{ form.submit(class="button1 rounded w-100 py-1") }}
+        </div>
+    </form>
+
+    {% for list in lists: %}
+        <div class="lead d-flex my-3 align-items-center">
+            <div class="col-xl-10 col-md-9 col-8 bg-color3 px-3 py-2 me-auto rounded position-relative">
+                <a href="{{ url_for('list_todos', list_id=list.id) }}" class="text-decoration-none text-color1 stretched-link">
+                    <span>{{ list.title }}</span>
+                 </a>
+            </div>
+            <div class="col-xl-1 col-md-2 col-3">
+                <a class="btn btn-danger w-100" href="{{ url_for('delete_list', list_id=list.id) }}">Delete</a>
+            </div>
+        </div>
+    {% endfor %}
+
+</div>
+{% endblock %}
